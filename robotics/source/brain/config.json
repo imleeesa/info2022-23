@@ -1,0 +1,20 @@
+{
+    "serial": {
+        "port": "/dev/ttyACM0"
+    },
+    "ai": {
+        "model_path": "build/model.h5",
+        "img_height": 180,
+        "img_width": 180,
+        "batch_size": 32
+    },
+    "motors": [
+        3,
+        5,
+        7,
+        8,
+        10,
+        12
+    ],
+    "btPort": "/dev/rfcomm1"
+}
