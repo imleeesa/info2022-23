@@ -1,6 +1,6 @@
 # Hydraflame ON-STAGE 20/21
 
-## Developers
+## Devel opers
 
 - Diego Caspi
 - Edoardo Berton
