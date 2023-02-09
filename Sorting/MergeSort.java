@@ -1,47 +1,73 @@
-import java.lang.reflect.Array;
+import java.util.Random;
+
 public class MergeSort{
-
-    public void sort(int[] array, int start, int size){
-        merge(array, start, size);
+    public static void sort(int[] array) {
+    int arraylength = array.length;
+    if (arraylength < 2) {
+        return;
     }
-    private void merge(int[] array, int start, int size){
-        int l;
-        int i;
-        if (array.length%2 == 0) {
-            l = array.length/2; 
-        }
-        else {
-            l = (array.length/2)+1;
-        }
-        int num = array[0];
-        for(i=0; i < l; i++){ 
-            if(num>array[i]){
-                int num2=array[i];
-                array[i-1]=num2;
-                array[i]=num;
-            }
-            num=array[i]; 
-        }
-        for(i=l; i < array.length-l; i++){ 
-            if(num>array[i]){
-                int num2=array[i];
-                array[i-1]=num2;
-                array[i]=num;
-            }
-            num=array[i]; 
-        }
-        if((array.length-start)%size==0){
-            int p = (array.length-start)/size;
-            i=0;
-            while(i < size){
-            if(array[start]>array[start+size]){
-                int n = array[start];
-                array[start]=array[start+size];
-                array[start+size]=n;
-            }
-            i++;
-            }
-        }
+    int mid = arraylength / 2;
+    int[] leftHalf = new int[mid];
+    int[] rightHalf = new int[arraylength - mid];
 
+    for(int i = 0; i < mid; i++) {
+      leftHalf[i] = array[i];
     }
+    for(int i = mid; i < arraylength; i++) {
+      rightHalf[i - mid] = array[i];
+    }
+    sort(leftHalf);
+    sort(rightHalf);
+    merge(array, leftHalf, rightHalf);
+  }
+
+  public static void merge(int[] array, int[] leftHalf, int[] rightHalf) {
+    int leftLength = leftHalf.length;
+    int rightLength = rightHalf.length;
+    
+    int i = 0, j = 0, k = 0;
+    
+    while (i < leftLength && j < rightLength) {
+      if (leftHalf[i] <= rightHalf[j]) {
+        array[k] = leftHalf[i];
+        i++;
+      }
+      else {
+        array[k] = rightHalf[j];
+        j++;
+      }
+      k++;
+    }
+    
+    while (i < leftLength) {
+      array[k] = leftHalf[i];
+      i++;
+      k++;
+    }
+    
+    while (j < rightLength) {
+      array[k] = rightHalf[j];
+      j++;
+      k++;
+    }
+    
+  }
+
+  private static void print(int[] b) {
+    for (int i = 0; i < b.length; i++) {
+      System.out.print(b[i] + " ");
+    }
+  }
+  public static void main(String[] args) {
+    Random rand = new Random();
+    int[] array = new int[10];
+    for(int i = 0; i < array.length; i++) {
+        array[i] = rand.nextInt(100);
+    }
+
+    print(array);
+    sort(array); 
+    System.out.println();
+    print(array);
+  }
 }
